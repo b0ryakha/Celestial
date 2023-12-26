@@ -39,9 +39,9 @@ class "Dialogue" {
             end, true)
         }
 
-        for _, button in pairs(self.buttons) do
-            local text_size = render.measure_text(fonts.ru_text, button:get_text())
-            button:set_bound(button:get_pos().x - 90 + text_size.x / 2, button:get_pos().y - 25 + text_size.y / 2, 180, 50)
+        for _, btn in pairs(self.buttons) do
+            local text_size = render.measure_text(fonts.ru_text, btn:get_text())
+            btn:set_bound(btn:get_pos().x - 90 + text_size.x / 2, btn:get_pos().y - 25 + text_size.y / 2, 180, 50)
         end
 
         self.messages = {}
@@ -150,30 +150,30 @@ class "Dialogue" {
         render.rectangle(100, 1080 - 320 - 100, 1920 - 200, 10, colors.accent, 100)
         render.rectangle(100, 1080 - 90, 1920 - 200, 10, colors.accent, 100)
 
-        for _, button in pairs(self.buttons) do
-            local text_size = render.measure_text(fonts.ru_text, button:get_text())
+        for _, btn in pairs(self.buttons) do
+            local text_size = render.measure_text(fonts.ru_text, btn:get_text())
 
-            if button:get_state() == ClickableState.hover then
-                render.rectangle(button:get_pos().x - 90 + text_size.x / 2 - 5, button:get_pos().y - 25 + text_size.y / 2 - 5, 190, 60, colors.accent, 50)
+            if btn:get_state() == ClickableState.hover then
+                render.rectangle(btn:get_pos().x - 90 + text_size.x / 2 - 5, btn:get_pos().y - 25 + text_size.y / 2 - 5, 190, 60, colors.accent, 50)
             end
 
-            render.rectangle(button:get_pos().x - 90 + text_size.x / 2, button:get_pos().y - 25 + text_size.y / 2, 180, 50, colors.darkening, 50)
+            render.rectangle(btn:get_pos().x - 90 + text_size.x / 2, btn:get_pos().y - 25 + text_size.y / 2, 180, 50, colors.darkening, 50)
 
-            button:draw()
+            btn:draw()
         end
 
         if self.anim_index < #text then return end
 
-        for _, button in pairs(self.messages[self.current].buttons) do
-            local text_size = render.measure_text(fonts.ru_text, button:get_text())
+        for _, btn in pairs(self.messages[self.current].buttons) do
+            local text_size = render.measure_text(fonts.ru_text, btn:get_text())
 
-            if button:get_state() == ClickableState.hover then
-                render.rectangle(button:get_pos().x - 200 + text_size.x / 2 - 5, button:get_pos().y - 25 + text_size.y / 2 - 5, 410, 60, colors.accent, 50)
+            if btn:get_state() == ClickableState.hover then
+                render.rectangle(btn:get_pos().x - 200 + text_size.x / 2 - 5, btn:get_pos().y - 25 + text_size.y / 2 - 5, 410, 60, colors.accent, 50)
             end
 
-            render.rectangle(button:get_pos().x - 200 + text_size.x / 2, button:get_pos().y - 25 + text_size.y / 2, 400, 50, colors.darkening, 50)
+            render.rectangle(btn:get_pos().x - 200 + text_size.x / 2, btn:get_pos().y - 25 + text_size.y / 2, 400, 50, colors.darkening, 50)
             
-            button:draw()
+            btn:draw()
         end
     end;
 
@@ -184,16 +184,16 @@ class "Dialogue" {
 
         self.portrait:update()
 
-        for _, button in pairs(self.buttons) do
-            button:update()
+        for _, btn in pairs(self.buttons) do
+            btn:update()
         end
 
         if mouse.is_pressed(button.Left) or keyboard.is_pressed(key.Enter) then
             self.anim_index = #self.messages[self.current].text
         end
 
-        for _, button in pairs(self.messages[self.current].buttons) do
-            button:update()
+        for _, btn in pairs(self.messages[self.current].buttons) do
+            btn:update()
         end
 
         if self.old_answer ~= "" and not mouse.is_pressed(button.Left) then

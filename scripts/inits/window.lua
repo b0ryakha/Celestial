@@ -8,11 +8,16 @@ init = function()
     window.set_frame_limit(100)
 
     if is_fullscreen then
-        window.set_size(1920, 1080)
-        window.set_pos(-9, -38)
+        if globalvars.get_os_name() == "Windows" then
+            window.set_size(1920, 1080)
+            window.set_pos(-9, -38)
+        elseif globalvars.get_os_name() == "Linux" then
+            window.set_pos(0, 0)
+            window.set_size(1920, 1080 - 90)
+        end
     end
 
-    assets.loading_screen = Sprite:new("./../assets/render addon/loading_screen.png", 1920, 1080)
+    assets.loading_screen = Sprite:new("./../assets/render addon/loading_screen.png", window.get_size().x, window.get_size().y)
     colors.accent = Color:new(10, 160, 240)
     colors.darkening = Color:new(0, 0, 0, 180)
 
@@ -27,7 +32,7 @@ init = function()
 
     assets.menu_background = {}
     for i = 0, 50 do
-        assets.menu_background[i + 1] = Sprite:new("./../assets/menu background/" .. tostring(i) .. ".png", 1920, 1080)
+        assets.menu_background[i + 1] = Sprite:new("./../assets/menu background/" .. tostring(i) .. ".png", window.get_size().x, window.get_size().y)
     end
 
     render.loading(50)
@@ -40,11 +45,21 @@ init = function()
 
     render.loading(70)
 
-    fonts.header = Font:new("./../fonts/SpeedyRegular.ttf", 110)
-    fonts.title = Font:new("./../fonts/SpeedyRegular.ttf", 50)
-    fonts.subtitle = Font:new("./../fonts/SpeedyRegular.ttf", 35)
-    fonts.text = Font:new("./../fonts/SpeedyRegular.ttf", 25)
-    fonts.ru_text = Font:new("./../fonts/Inter.ttf", 25, "b")
+    if (globalvars.get_os_name() == "Windows") then
+        fonts.header = Font:new("./../fonts/SpeedyRegular.ttf", 110)
+        fonts.title = Font:new("./../fonts/SpeedyRegular.ttf", 50)
+        fonts.subtitle = Font:new("./../fonts/SpeedyRegular.ttf", 35)
+        fonts.text = Font:new("./../fonts/SpeedyRegular.ttf", 25)
+        fonts.ru_text = Font:new("./../fonts/Inter.ttf", 25, "b")
+    elseif (globalvars.get_os_name() == "Linux") then
+        fonts.header = Font:new("SpeedyRegular.ttf", 110)
+        fonts.title = Font:new("SpeedyRegular.ttf", 50)
+        fonts.subtitle = Font:new("SpeedyRegular.ttf", 35)
+        fonts.text = Font:new("SpeedyRegular.ttf", 25)
+        fonts.ru_text = Font:new("Inter.ttf", 25, "b")
+    else
+        error("An unknown operating system is being used.");
+    end
 
     assets.play_button = Sprite:new("./../assets/menu icons/offline.png", 55, 55)
     assets.play_online_button = Sprite:new("./../assets/menu icons/online.png", 55, 55)

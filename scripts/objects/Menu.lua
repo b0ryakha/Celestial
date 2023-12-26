@@ -20,6 +20,7 @@ class "Menu" {
 --public:
     constructor = function(self)
         self.background = Gif(assets.menu_background);
+        
         self.buttons = {
             play = IconButton(assets.play_button, 60, 60, colors.gray, colors.white, function()
                 self.last_active_button = "play"
@@ -54,7 +55,7 @@ class "Menu" {
                 window.close()
             end),
         }
-
+        
         sounds.menu_music:play()
 
         self.play_tab = {}
@@ -81,9 +82,9 @@ class "Menu" {
         self.background:update()
 
         local all_inactive = true
-        for _, button in pairs(self.buttons) do
-            button:update()
-            all_inactive = all_inactive and not button:is_active()
+        for _, btn in pairs(self.buttons) do
+            btn:update()
+            all_inactive = all_inactive and not btn:is_active()
         end
 
         if all_inactive then
@@ -102,9 +103,7 @@ class "Menu" {
             end
         end
 
-        if self.buttons.settings:is_active() then
-            
-        end
+        --TODO: add settigns tab
     end;
 
     draw = function(self)
@@ -188,8 +187,8 @@ class "Menu" {
             end
         end
         
-        for _, button in pairs(self.buttons) do
-            button:draw()
+        for _, btn in pairs(self.buttons) do
+            btn:draw()
         end
     end;
 }

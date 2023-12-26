@@ -51,9 +51,9 @@ class "GameMenu" {
         if not self.open_flag then return end
 
         local all_inactive = true
-        for _, button in pairs(self.buttons) do
-            button:update()
-            all_inactive = all_inactive and not button:is_active()
+        for _, btn in pairs(self.buttons) do
+            btn:update()
+            all_inactive = all_inactive and not btn:is_active()
         end
 
         if all_inactive then
@@ -88,8 +88,8 @@ class "GameMenu" {
             render.text(65, 225, fonts.text, "SAVE_1 ..............................................", colors.light_gray)
         end
 
-        for _, button in pairs(self.buttons) do
-            button:draw()
+        for _, btn in pairs(self.buttons) do
+            btn:draw()
         end
     end;
 }
