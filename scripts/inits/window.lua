@@ -45,21 +45,11 @@ init = function()
 
     render.loading(70)
 
-    if (globalvars.get_os_name() == "Windows") then
-        fonts.header = Font:new("./../fonts/SpeedyRegular.ttf", 110)
-        fonts.title = Font:new("./../fonts/SpeedyRegular.ttf", 50)
-        fonts.subtitle = Font:new("./../fonts/SpeedyRegular.ttf", 35)
-        fonts.text = Font:new("./../fonts/SpeedyRegular.ttf", 25)
-        fonts.ru_text = Font:new("./../fonts/Inter.ttf", 25, "b")
-    elseif (globalvars.get_os_name() == "Linux") then
-        fonts.header = Font:new("SpeedyRegular.ttf", 110)
-        fonts.title = Font:new("SpeedyRegular.ttf", 50)
-        fonts.subtitle = Font:new("SpeedyRegular.ttf", 35)
-        fonts.text = Font:new("SpeedyRegular.ttf", 25)
-        fonts.ru_text = Font:new("Inter.ttf", 25, "b")
-    else
-        error("An unknown operating system is being used.");
-    end
+    fonts.header = Font:new("SpeedyRegular.ttf", 110)
+    fonts.title = Font:new("SpeedyRegular.ttf", 50)
+    fonts.subtitle = Font:new("SpeedyRegular.ttf", 35)
+    fonts.text = Font:new("SpeedyRegular.ttf", 25)
+    fonts.ru_text = Font:new("Inter.ttf", 25, "b")
 
     assets.play_button = Sprite:new("./../assets/menu icons/offline.png", 55, 55)
     assets.play_online_button = Sprite:new("./../assets/menu icons/online.png", 55, 55)
